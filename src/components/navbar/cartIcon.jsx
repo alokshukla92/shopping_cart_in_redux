@@ -1,19 +1,13 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 
-const NotificationIcon = () => {
+const NotificationIcon = ({ onClick }) => {
   const cart_count = useSelector((state) => state.cartCounter.value);
-  const navigate = useNavigate();  // Initialize the navigate function
-
-  const handleClick = () => {
-    navigate('/cart');  // Navigate to the /cart page
-  };
 
   return (
     <button 
       className="relative inline-flex items-center justify-center" 
-      onClick={handleClick} 
+      onClick={onClick} 
       aria-label="Cart"
     >
       {/* Cart Icon */}

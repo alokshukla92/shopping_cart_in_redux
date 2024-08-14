@@ -1,10 +1,22 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom'; // Import Link if using React Router
 import NotificationIcon from './cartIcon';
+import CartItem from '../cart/CartItem';
+import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  
+  const navigate = useNavigate(); // Initialize useNavigate
+  const [isCartOpen, setIsCartOpen] = useState(false);
+
+  const handleCartClick = () => {
+    setIsCartOpen(true);
+    // navigate('/cart'); // Change URL to /cart
+  };
+
+  const handleCloseCart = () => {
+    setIsCartOpen(false);
+  };
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -92,7 +104,12 @@ const Navbar = () => {
               </div>
             </div>
           </div>
-          <NotificationIcon />
+          {/* Cart Icon */}
+        {/* Cart Icon */}
+        <NotificationIcon onClick={handleCartClick} />
+
+        {/* Cart Item Dialog */}
+        {isCartOpen && <CartItem onClose={handleCloseCart} />}
         </div>
       </div>
 
