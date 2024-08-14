@@ -1,26 +1,53 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 const initialState = {
-  value: 0,
-}
+  items: [],
+  addedItems: [],
+  status: 'idle',
+  error: null,
+};
 
-export const cartCounterSlice = createSlice({
-  name: 'cart_count',
+export const fetchProducts = createAsyncThunk('cart/fetchProducts', async () => {
+  const response = await fetch('https://fakestoreapi.com/products'); 
+  if (!response.ok) {
+    throw new Error('Network response was not ok');
+  }
+  
+  const data = await response.json(); 
+  
+  return data; 
+});
+
+
+const cartSlice = createSlice({
+  name: 'cart',
   initialState,
   reducers: {
-    increment: (state) => {
-      state.value += 1
+    addItem: (state, action) => {
+      state.addedItems.push(action.payload);
     },
-    decrement: (state) => {
-      state.value -= 1
+    removeItem: (state, action) => {
+      state.addedItems = state.items.filter(item => item.id !== action.payload.id);
     },
-    incrementByAmount: (state, action) => {
-      state.value += action.payload
+    clearCart: (state) => {
+      state.addedItems = [];
     },
   },
-})
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchProducts.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(fetchProducts.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.items = action.payload;
+      })
+      .addCase(fetchProducts.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message;
+      });
+  },
+});
 
-// Action creators are generated for each case reducer function
-export const { increment, decrement, incrementByAmount } = cartCounterSlice.actions
-
-export default cartCounterSlice.reducer
+export const { addItem, removeItem, clearCart } = cartSlice.actions;
+export default cartSlice.reducer;

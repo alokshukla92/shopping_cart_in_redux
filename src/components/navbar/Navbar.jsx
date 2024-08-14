@@ -81,6 +81,13 @@ const Navbar = () => {
                 >
                   About
                 </Link>
+                <Link
+                  to="/cart"
+                  className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                  aria-current="page"
+                >
+                  Cart
+                </Link>
                 {/* <span>Cart Count = {cart_count}</span> */}
               </div>
             </div>
