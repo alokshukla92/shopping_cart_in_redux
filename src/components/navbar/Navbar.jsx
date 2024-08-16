@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom'; // Import Link if using React Router
+import { Link } from 'react-router-dom'; 
 import NotificationIcon from './cartIcon';
 import CartItem from '../cart/CartItem';
 import { useNavigate } from 'react-router-dom';
@@ -100,15 +100,11 @@ const Navbar = () => {
                 >
                   Cart
                 </Link>
-                {/* <span>Cart Count = {cart_count}</span> */}
               </div>
             </div>
           </div>
-          {/* Cart Icon */}
-        {/* Cart Icon */}
         <NotificationIcon onClick={handleCartClick} />
 
-        {/* Cart Item Dialog */}
         {isCartOpen && <CartItem onClose={handleCloseCart} />}
         </div>
       </div>

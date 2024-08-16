@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addItem, fetchProducts } from '../redux/slices/cartSlice';
-import { increment } from '../redux/slices/cartCounterSlice';
+import Loader from '../components/utils/Loader';
+import ProductList from '../components/product/ProductList';
 
 const HomePage = () => {
     const dispatch = useDispatch();
@@ -15,23 +16,12 @@ const HomePage = () => {
         }
     }, [status, dispatch]);
 
-    const handleAddToCart = (product) => {
-        dispatch(addItem(product));
-        dispatch(increment())
-    };
-
-    if (status === 'loading') return <p>Loading...</p>;
+    if (status === 'loading') return <Loader />;
     if (status === 'failed') return <p>Error: {error}</p>;
 
     return (
-        <div>
-        {products.map((product) => (
-            <div key={product.id}>
-            <h3>{product.title}</h3>
-            <p>${product.price}</p>
-            <button onClick={() => handleAddToCart(product)}>Add to Cart</button>
-            </div>
-        ))}
+        <div className='container'>
+            <ProductList products={products} />
         </div>
     );
 }
