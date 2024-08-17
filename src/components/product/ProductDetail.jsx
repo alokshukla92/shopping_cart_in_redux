@@ -1,7 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
-// Mock product data
 const productData = {
   1: {
     id: 1,
@@ -31,6 +30,7 @@ const ProductDetail = () => {
 
   return (
     <section className="py-12 bg-gray-100">
+      <h1>Still In Progress</h1>
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row bg-white shadow-lg rounded-lg overflow-hidden">
           <div className="lg:w-1/2">

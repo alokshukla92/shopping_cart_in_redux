@@ -1,4 +1,13 @@
+import { useDispatch } from 'react-redux';
+import { removeItem } from '../../redux/slices/cartSlice'; 
+
 export default function CartItem({ product }) {
+  const dispatch = useDispatch();
+
+  const handleRemove = () => {
+    dispatch(removeItem(product));
+  };
+
   return (
     <li key={product.id} className="flex py-6">
       <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
@@ -18,7 +27,11 @@ export default function CartItem({ product }) {
         </div>
         <div className="flex flex-1 items-end justify-between text-sm">
           <p className="text-gray-500">Qty {product.qty}</p>
-          <button type="button" className="font-medium text-indigo-600 hover:text-indigo-500">
+          <button
+            type="button"
+            onClick={handleRemove}
+            className="font-medium text-indigo-600 hover:text-indigo-500"
+          >
             Remove
           </button>
         </div>

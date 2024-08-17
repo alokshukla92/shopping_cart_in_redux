@@ -2,12 +2,12 @@ import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/re
 import { XMarkIcon } from '@heroicons/react/24/outline';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import CartItem from './CartItem'
+import CartItem from './CartItem';
+import CartEmpty from './CartEmpty';
 
 export default function Cart({ onClose }) {
   const products = useSelector((state) => state.cart.addedItems);
 
-  // Calculate the total price rounded to 2 decimals
   const total = products.reduce((acc, product) => acc + (product.price * product.qty), 0).toFixed(2);
 
   return (
@@ -36,43 +36,48 @@ export default function Cart({ onClose }) {
                     </button>
                   </div>
                   <div className="mt-8">
-                    <div className="flow-root">
-                    <ul className="-my-6 divide-y divide-gray-200">
-                    {products.map((product) => (
-                      <CartItem product={product}/>
-                    ))}
-                  </ul>
-
-                    </div>
+                    {products.length === 0 ? (
+                      <CartEmpty onClose={onClose}/>
+                    ) : (
+                      <div className="flow-root">
+                        <ul className="-my-6 divide-y divide-gray-200">
+                          {products.map((product) => (
+                            <CartItem key={product.id} product={product} />
+                          ))}
+                        </ul>
+                      </div>
+                    )}
                   </div>
                 </div>
-                <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
-                  <div className="flex justify-between text-base font-medium text-gray-900">
-                    <p>Subtotal</p>
-                    <p>${total}</p>
-                  </div>
-                  <p className="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
-                  <div className="mt-6">
-                    <Link
-                      to="#"
-                      className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
-                    >
-                      Checkout
-                    </Link>
-                  </div>
-                  <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
-                    <p>
-                      or{' '}
-                      <button
-                        type="button"
-                        onClick={onClose}
-                        className="font-medium text-indigo-600 hover:text-indigo-500"
+                {products.length > 0 && (
+                  <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
+                    <div className="flex justify-between text-base font-medium text-gray-900">
+                      <p>Subtotal</p>
+                      <p>${total}</p>
+                    </div>
+                    <p className="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
+                    <div className="mt-6">
+                      <Link
+                        to="#"
+                        className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
                       >
-                        Continue Shopping
-                        <span aria-hidden="true"> &rarr;</span>
-                      </button>
-                    </p>
+                        Checkout
+                      </Link>
+                    </div>
                   </div>
+                )}
+                <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
+                  <p>
+                    or{' '}
+                    <button
+                      type="button"
+                      onClick={onClose}
+                      className="font-medium text-indigo-600 hover:text-indigo-500"
+                    >
+                      Continue Shopping
+                      <span aria-hidden="true"> &rarr;</span>
+                    </button>
+                  </p>
                 </div>
               </div>
             </DialogPanel>
