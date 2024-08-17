@@ -2,7 +2,8 @@ import React from 'react';
 
 export default function CartEmpty({ onClose }) {
   return (
-    <div className="flex items-center justify-center h-64 bg-gray-100 p-6 rounded-md shadow-md">
+    <div className="container">
+        <div className="flex items-center justify-center h-64 bg-gray-100 p-6 rounded-md shadow-md">
       <div className="text-center">
         <svg
           className="mx-auto h-12 w-12 text-gray-400"
@@ -30,5 +31,7 @@ export default function CartEmpty({ onClose }) {
         </button>
       </div>
     </div>
+    </div>
+    
   );
 }

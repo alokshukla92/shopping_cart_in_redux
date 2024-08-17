@@ -1,11 +1,18 @@
 import { useDispatch } from 'react-redux';
 import { removeItem } from '../../redux/slices/cartSlice'; 
 
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 export default function CartItem({ product }) {
   const dispatch = useDispatch();
 
   const handleRemove = () => {
     dispatch(removeItem(product));
+    toast.info('Item Removed!', {
+      position: "top-center",
+      autoClose: 1000
+      });
   };
 
   return (

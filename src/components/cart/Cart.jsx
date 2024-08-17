@@ -11,7 +11,7 @@ export default function Cart({ onClose }) {
   const total = products.reduce((acc, product) => acc + (product.price * product.qty), 0).toFixed(2);
 
   return (
-    <Dialog open={true} onClose={onClose} className="relative z-10">
+    <Dialog open={true} onClose={onClose} className="relative z-50">
       <DialogBackdrop
         className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity duration-500 ease-in-out"
         aria-hidden="true"
@@ -20,7 +20,7 @@ export default function Cart({ onClose }) {
         <div className="absolute inset-0 overflow-hidden">
           <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
             <DialogPanel
-              className="pointer-events-auto w-screen max-w-md transform transition-opacity duration-500 ease-in-out"
+              className="pointer-events-auto w-screen max-w-md transform transition-transform duration-500 ease-in-out"
             >
               <div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
                 <div className="flex-1 overflow-y-auto px-4 py-6 sm:px-6">
@@ -29,7 +29,7 @@ export default function Cart({ onClose }) {
                     <button
                       type="button"
                       onClick={onClose}
-                      className="relative -m-2 p-2 text-gray-400 hover:text-gray-500"
+                      className="relative p-2 text-gray-400 hover:text-gray-500 z-20"
                     >
                       <span className="sr-only">Close panel</span>
                       <XMarkIcon aria-hidden="true" className="h-6 w-6" />
@@ -37,7 +37,7 @@ export default function Cart({ onClose }) {
                   </div>
                   <div className="mt-8">
                     {products.length === 0 ? (
-                      <CartEmpty onClose={onClose}/>
+                      <CartEmpty onClose={onClose} />
                     ) : (
                       <div className="flow-root">
                         <ul className="-my-6 divide-y divide-gray-200">

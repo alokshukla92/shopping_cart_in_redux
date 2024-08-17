@@ -1,11 +1,17 @@
 import React from 'react';
 import { addItem } from '../../redux/slices/cartSlice';
 import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ProductList = ({ products }) => {
     const dispatch = useDispatch();
     const handleAddToCart = (item) => {
       dispatch(addItem({ ...item, qty: 1 }));
+      toast.success('Item Added to Cart!', {
+        position: "top-center",
+        autoClose: 1000
+        });
     }
 
     return (

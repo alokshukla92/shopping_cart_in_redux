@@ -1,3 +1,7 @@
+.Toastify__toast {
+  font-family: 'Inter', sans-serif;
+}
+
 .App {
   text-align: center;
 }
@@ -35,4 +39,12 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.sticky-navbar {
+  z-index: 50; /* Or a value lower than the dialog's z-index */
+}
+
+.dialog-panel {
+  z-index: 60; /* Higher than the sticky navbar */
 }
