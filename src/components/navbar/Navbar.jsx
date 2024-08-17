@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom'; 
-import NotificationIcon from './cartIcon';
-import CartItem from '../cart/CartItem';
-import { useNavigate } from 'react-router-dom';
+import CartIcon from './CartIcon';
+import Cart from '../cart/Cart';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const navigate = useNavigate(); // Initialize useNavigate
   const [isCartOpen, setIsCartOpen] = useState(false);
 
   const handleCartClick = () => {
@@ -103,9 +101,9 @@ const Navbar = () => {
               </div>
             </div>
           </div>
-        <NotificationIcon onClick={handleCartClick} />
+        <CartIcon onClick={handleCartClick} />
 
-        {isCartOpen && <CartItem onClose={handleCloseCart} />}
+        {isCartOpen && <Cart onClose={handleCloseCart} />}
         </div>
       </div>
 

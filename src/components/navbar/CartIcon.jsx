@@ -1,13 +1,13 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-const NotificationIcon = ({ onClick }) => {
-  const cart_count = useSelector((state) => state.cartCounter.value);
+const CartIcon = ({ onClick }) => {
+  const cart_count = useSelector((state) => state.cart.cart_qty);
 
   return (
     <button 
       className="relative inline-flex items-center justify-center" 
-      onClick={onClick} 
+      onClick={onClick}
       aria-label="Cart"
     >
       {/* Cart Icon */}
@@ -34,4 +34,4 @@ const NotificationIcon = ({ onClick }) => {
   );
 };
 
-export default NotificationIcon;
+export default CartIcon;

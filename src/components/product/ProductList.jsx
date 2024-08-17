@@ -5,8 +5,7 @@ import { useDispatch } from 'react-redux';
 const ProductList = ({ products }) => {
     const dispatch = useDispatch();
     const handleAddToCart = (item) => {
-        dispatch(addItem(item));
-        // dispatch(increment())
+      dispatch(addItem({ ...item, qty: 1 }));
     } 
   return (
     <section className="py-24">
